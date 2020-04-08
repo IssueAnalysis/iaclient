@@ -1,87 +1,132 @@
 <template>
-    <div class="firstdemo" style="background:url(../assets/1c.png)">
-        <el-form ref="form" :model="form" label-width="100px">
-            <br><br><br><br><br><br><br><br>
-            <el-row type="flex" justify="center">
-                <el-col :span="6">
-                    <el-form-item>
-                        <v-img
-                                contain
-                                src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3808335119,2126377622&fm=26&gp=0.jpg"
-                                height="300"
-                                max-height="300"
-                                max-width="500"
-                                width="500"
-                        />
-                    </el-form-item>
-                </el-col>
-            </el-row>
-            <el-row type="flex" justify="center">
-                <el-col :span="5">
-                    <el-form-item label="账户：" prop="name">
-                        <el-input v-model="form.name" size="small"></el-input>
-                    </el-form-item>
-                </el-col>
-            </el-row>
-            <el-row type="flex" justify="center">
-                <el-col :span="5">
-                    <el-form-item label="密码：" prop="password">
-                        <el-input v-model="form.password" size="small"></el-input>
-                    </el-form-item>
-                </el-col>
-            </el-row>
-            <br>
-            <el-row type="flex" justify="center">
-                <el-col :span="1">
-                    <el-form-item>
-                        <el-button type="primary" @click="submit">登录</el-button>
-                    </el-form-item>
-                </el-col>
-                <el-col :span="2">
-                    <el-form-item>
-                        <el-button @click="register">注册</el-button>
-                    </el-form-item>
-                </el-col>
-            </el-row>
+    <div class="login">
+        <div class="loginBox">
+            <h1 align="center">Issue Analysis</h1>
+        <el-form
+            ref="loginForm"
+            label-width="20px"
+            :model="loginForm"
+        >
+            <el-form-item
+                label=""
+                prop="username"
+                style="margin-top:60px;"
+            >
+                <el-row>
+                    <el-col :span='2'>
+                        <span style= "font-size:20px;" class="el-icon-user"></span>
+                    </el-col>
+                    <el-col :span='22'>
+                        <el-input
+                            class="inps"
+                            placeholder='用户名'
+                            v-model="loginForm.username"
+                        ></el-input>
+                    </el-col>
+                </el-row>
+            </el-form-item>
+            <el-form-item
+                label=""
+                prop="password"
+            >
+                <el-row
+                    style="margin-top:40px;"
+                >
+                    <el-col :span='2'>
+                        <span style= "font-size:20px;" class="el-icon-lock"></span>
+                    </el-col>
+                    <el-col :span='22'>
+                        <el-input
+                            class="inps"
+                            placeholder='密码'
+                            v-model="loginForm.password"
+                        ></el-input>
+                    </el-col>
+                </el-row>
+            </el-form-item>
+            <el-form-item style="margin-top:80px;">
+                <el-button
+                    type="primary"
+                    round
+                    class="submit"
+                    @click="submit"
+                >登录</el-button>
+                <el-button
+                        type="primary"
+                        round
+                        class="submit"
+                        @click="submit"
+                >注册</el-button>
+            </el-form-item>
         </el-form>
-        <!--<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>-->
+        </div>
     </div>
 </template>
 
 
-<!--数据存贮交互，事件控制地区-->
 <script>
     export default {
-        name: 'firstdemo',
+        name: 'login',
         data () {
             return {
-                form:{
-                    name:'',
+                loginForm:{
+                    username:'',
                     password:'',
                 },
-
             }
         },
         methods:{
-            /*提交进行判断的函数 */
-            submit:function(){
-                if(this.form.name==="张三"&&this.form.password==="123456")
+            submit(){
+                if(this.loginForm.username==="admin"&&this.loginForm.password==="123456")
                     alert("登录成功")
                 else
                     alert("账号或密码错误")
             },
-            register:function(){},
+            register(){},
         },
     }
 </script>
 
-<!-- 写样式的地方 -->
-<style scoped>
-    .firstdemo{
-        background-image: url(https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3225229108,1886865633&fm=26&gp=0.jpg);
-        background-size: 100% 100%;
-        height: 100%;
-        position: fixed;
-        width: 100%
+<style lang='less' scoped>
+    .login {
+        width: 100vw;
+        padding: 0;
+        margin: 0;
+        height: 100vh;
+        background-position: left top;
+        color: #fff;
+        background-size: 100%;
+        background-image: url("../assets/bgi.jpg");
+        position: relative;
+        .loginBox {
+            width: 460px;
+            height: 580px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            padding: 100px 50px 40px 40px;
+            box-shadow: 10px 15px 15px rgba(6, 17, 47, 0.7);
+            opacity: 1;
+            background: linear-gradient(
+                230deg,
+                rgba(53, 57, 74, 0) 0%,
+                rgb(0, 0, 0) 100%
+            );
+            /deep/ .inps input {
+                border: none;
+                color: #fff;
+                background-color: transparent;
+                font-size: 22px;
+            }
+            .submit {
+                background-color: transparent;
+                color: #39f;
+                width: 160px;
+                height: 50px;
+            }
+        }
     }
 </style>
