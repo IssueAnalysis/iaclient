@@ -1,6 +1,5 @@
 <template>
-  <div>
-  <el-container class="container">
+  <el-container>
     <el-header>
       <el-row>
         <el-col :span="12">
@@ -32,7 +31,6 @@
       </el-main>
     </el-container>
   </el-container>
-  </div>
 </template>
 
 <script>
@@ -50,7 +48,7 @@
     };
 </script>
 <style lang="scss" scoped>
-  .container {
+  .el-container {
     height: 100vh;
     width: 100vw;
     padding: 0px;
