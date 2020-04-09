@@ -39,6 +39,7 @@
                         <el-input
                             class="inps"
                             placeholder='密码'
+                            show-password
                             v-model="loginForm.password"
                         ></el-input>
                     </el-col>
@@ -78,9 +79,9 @@
         methods:{
             submit(){
                 if(this.loginForm.username==="admin"&&this.loginForm.password==="123456")
-                    alert("登录成功")
+                    this.$message.success("登录成功")
                 else
-                    alert("账号或密码错误")
+                    this.$message.error("账号或密码错误")
             },
             register(){},
         },
