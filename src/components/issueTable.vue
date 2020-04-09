@@ -36,22 +36,18 @@
             operator:"",
 
             headers: [
-                { text: 'GitHash',value: 'id'},
-                { text: 'PSM', value: 'url' },
-                { text: 'Ticket ID', value: 'intension' },
-                { text: '负责人', value: 'consideration' },
-                { text: '作者', value: 'user_id' },
-                { text: '介绍', value: 'desc' },
-                { text: '是否确认', value: 'confirm'},
+                { text: 'ID',value: 'id'},
+                { text: '概括', value: 'summary' },
+                { text: '详细描述', value: 'description' },
+                { text: '关注点', value: 'intention' },
+                { text: '考虑', value: 'consideration' },
             ],
             issues: [{
-                id:"test",
-                psm:"testPSM",
-                ticket_id:0,
-                owner:"testOwner",
-                author:"testAuthor",
-                desc:"testDesc",
-                confirm:0
+                id:"testID",
+                summary:"testSummary",
+                description:"testDesc",
+                intention:"testIntention",
+                consideration:"testConsideration"
             }],
         }),
         props:{
