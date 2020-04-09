@@ -79,7 +79,7 @@
         methods:{
             submit(){
                 if(this.loginForm.username==="admin"&&this.loginForm.password==="123456")
-                    this.$message.success("登录成功")
+                    this.$router.push('/')
                 else
                     this.$message.error("账号或密码错误")
             },
