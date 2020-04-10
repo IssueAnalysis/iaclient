@@ -22,6 +22,7 @@
                 v-model="textarea"
                 v-show="!isFile">
         </el-input>
+        <el-button style="margin: 20px" size="small" type="success" @click="changeType">切换上传方式</el-button>
 
         <el-button style="margin: 20px" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
     </v-container>
@@ -31,16 +32,17 @@
     import axios from 'axios'
     export default {
         name: "issuePost",
-        props:{
-            isFile: Boolean
-        },
         data() {
             return {
+                isFile:true,
                 textarea: "",
                 fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
             };
         },
         methods: {
+            changeType(){
+                this.isFile = !this.isFile
+            },
             submitUpload() {
                 const app = this
                 if(app.isFile) {

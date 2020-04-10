@@ -1,6 +1,5 @@
 <template>
-    <v-app align="center">
-        <v-card>
+        <v-card align="center">
             <v-card-title>
                 Issue Table
                 <v-spacer></v-spacer>
@@ -24,7 +23,6 @@
                 </template>
             </v-data-table>
         </v-card>
-    </v-app>
 </template>
 
 <script>

@@ -1,17 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import Login from "../views/Login.vue";
-import issuePost from "../components/issuePost";
+import IssueTable from "../views/IssueTable";
+import IssuePost from "../views/IssuePost";
 
 Vue.use(VueRouter)
 
   const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'home',
+    redirect: '/issue_check'
   },
+    {
+      path: '/issue_check',
+      name: 'issue_check',
+      component: IssueTable
+    },
+    {
+      path: '/issue_post',
+      name: 'Issue_post',
+      component: IssuePost
+    },
   {
     path: '/about',
     name: 'About',
@@ -24,11 +34,6 @@ Vue.use(VueRouter)
       path: '/login',
       name: 'Login',
       component: Login
-    },
-    {
-      path: '/test',
-      name: 'test',
-      component: issuePost
     },
 ]
 

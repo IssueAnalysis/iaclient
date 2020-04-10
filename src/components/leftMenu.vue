@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-menu
-                default-active="1"
+                :default-active="this.$route.path.split('/')[1]"
                 class="el-menu-vertical-demo"
                 @open="handleOpen"
                 @close="handleClose"
@@ -14,10 +14,10 @@
                     <span style="margin-left: 10px">用户管理</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="11" @click="userCenter">个人中心</el-menu-item>
+                    <el-menu-item index="user_center" @click="userCenter">个人中心</el-menu-item>
                 </el-menu-item-group>
                 <el-menu-item-group>
-                    <el-menu-item index="12" @click="modifyPw">修改密码</el-menu-item>
+                    <el-menu-item index="pass_manage" @click="modifyPw">修改密码</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
@@ -26,10 +26,10 @@
                     <span style="margin-left: 10px">Issue管理</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="21" @click="viewIssue">Issue查看</el-menu-item>
+                    <el-menu-item index="issue_check" @click="routeTo('/issue_check')">Issue查看</el-menu-item>
                 </el-menu-item-group>
                 <el-menu-item-group>
-                    <el-menu-item index="22" @click="importIssue">Issue导入</el-menu-item>
+                    <el-menu-item index="issue_post" @click="routeTo('/issue_post')">Issue导入</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -39,9 +39,13 @@
 <script>
     export default {
         data() {
-            return {};
+            return {
+            };
         },
         methods: {
+            routeTo(path){
+                this.$router.push(path);
+            },
             handleOpen() {
             },
             handleClose() {
