@@ -44,7 +44,6 @@
     padding: 0px;
     background-image: url("assets/bgi.jpg");
     background-size: 100%;
-
   }
 
   .el-main {

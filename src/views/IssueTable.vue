@@ -59,19 +59,24 @@
             initialize(){
                 const app = this
                 app.ticket_id = this.$route.query.ticket_id
-                axios
-                    .get(`/api/user/info`)
-                    .then(response => {
-                        app.operator = response.data.user_name
-                        axios.post("/api/issue/get",{
-                            id:app.issue_id,
-                            user_id:app.user_id
-                        }).then(res=>{
-                            app.issues = res.data
-                        })
-                    })
-                    .catch(error => {
-                        this.$message.error('获取用户信息失败：Err = ' + error.response.data.message)
+                // axios
+                //     .get(`/api/user/info`)
+                //     .then(response => {
+                //         app.operator = response.data.user_name
+                //         axios.post("/api/issue/get",{
+                //             id:app.issue_id,
+                //             user_id:app.user_id
+                //         }).then(res=>{
+                //             app.issues = res.data
+                //         })
+                //     })
+                //     .catch(error => {
+                //         this.$message.error('获取用户信息失败：Err = ' + error.response.data.message)
+                //     })
+
+                axios.get("/api/issue/find_all")
+                    .then(res=>{
+                        app.issues = res.data
                     })
             }
         }
