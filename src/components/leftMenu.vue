@@ -63,15 +63,6 @@
     };
 </script>
 
-<style>
-    .el-aside {
-        display: block;
-        position: relative;
-        background-color: #545c64;
-        opacity: 0.75;
-    }
-    .el-submenu__title {
-        font-size: 20px;
-        font-weight: 800;
-    }
+<style scoped>
+
 </style>

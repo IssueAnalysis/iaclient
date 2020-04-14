@@ -21,6 +21,7 @@
                             class="inps"
                             placeholder='用户名'
                             v-model="loginForm.username"
+                            oninput="this.value=this.value.replace(/[^\w_]/g,'');"
                         ></el-input>
                     </el-col>
                 </el-row>
@@ -41,6 +42,7 @@
                             placeholder='密码'
                             show-password
                             v-model="loginForm.password"
+                            oninput="this.value=this.value.replace(/[^\w_]/g,'');"
                         ></el-input>
                     </el-col>
                 </el-row>
@@ -50,13 +52,13 @@
                     type="primary"
                     round
                     class="submit"
-                    @click="submit"
+                    @click="handleLogin"
                 >登录</el-button>
                 <el-button
                         type="primary"
                         round
                         class="submit"
-                        @click="submit"
+                        @click="handleSignup"
                 >注册</el-button>
             </el-form-item>
         </el-form>
@@ -66,6 +68,7 @@
 
 
 <script>
+//    import axios from 'axios'
     export default {
         name: 'login',
         data () {
@@ -77,13 +80,30 @@
             }
         },
         methods:{
-            submit(){
-                if(this.loginForm.username==="admin"&&this.loginForm.password==="123456")
+            handleLogin(){
+//                axios.post('/api/user/log_in',this.loginForm)
+//                    .then(res=>{
+//                    if(res){
+//                        sessionStorage.setItem('accessToken',true)
+//                        sessionStorage.setItem('username',this.username)
+//                        this.$router.push('/')
+//                    }
+//                    else{
+//                        this.$message.error("账号或密码错误")
+//                    }
+//                })
+                if(this.loginForm.username=='admin'&&this.loginForm.password=='123456'){
+                    sessionStorage.setItem('accessToken',true)
+                    sessionStorage.setItem('username',this.username)
                     this.$router.push('/')
-                else
-                    this.$message.error("账号或密码错误")
+                }
+                else{
+                    this.$message.error('Invalid username or password')
+                }
             },
-            register(){},
+            handleSignup(){
+                this.$router.push('/signup')
+            },
         },
     }
 </script>

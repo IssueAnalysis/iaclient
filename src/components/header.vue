@@ -7,7 +7,11 @@
             <el-col class="logout" :span="12">
                 <template>
                     <div class="navOperater">
-                        <router-link :to="{ path: '/login' }">退出</router-link>
+                        <el-button
+                                type="text"
+                                class="submit"
+                                @click="handleLogout"
+                        >退出登录</el-button>
                     </div>
                     <div class="navOperater">
                         <el-avatar
@@ -22,30 +26,33 @@
 </template>
 
 <script>
-    export default {
-        methods:{
+    import ElButton from "../../node_modules/element-ui/packages/button/src/button.vue";
 
+    export default {
+        components: {ElButton},
+        methods:{
+            handleLogout() {
+                sessionStorage.clear()
+                this.$router.push('/login')
+                console.log(sessionStorage.getItem('accessToken'))
+            }
         }
     }
 </script>
 
-<style lang="scss">
-    .el-header {
-        text-align: left;
-        background-color: #545c64;
-        opacity: 0.75;
-        .logout {
-            text-align: right;
-            .navOperater {
-                width: 80px;
-                height: 80px;
-                float: right;
-                line-height: 45px;
-                margin-top:8px;
-            }
-            a{
-                color: white;
-            }
+<style lang="scss" scoped>
+    .logout {
+        text-align: right;
+        .navOperater {
+            width: 80px;
+            height: 80px;
+            float: right;
+            line-height: 45px;
+            margin-top:8px;
+        }
+        .submit{
+            color: white;
+            margin-right:6px;
         }
     }
 </style>

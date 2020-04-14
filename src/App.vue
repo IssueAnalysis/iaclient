@@ -1,10 +1,10 @@
 <template>
   <el-container>
-    <el-header v-if="!isLogin">
+    <el-header v-if="$route.path!='/login'&&$route.path!='/signup'">
       <myHeader />
     </el-header>
     <el-container>
-      <el-aside v-if="!isLogin">
+      <el-aside v-if="$route.path!='/login'&&$route.path!='/signup'">
         <leftMenu />
       </el-aside>
       <el-main>
@@ -41,12 +41,30 @@
   .el-container {
     height: 100vh;
     width: 100vw;
-    padding: 0px;
     background-image: url("assets/bgi.jpg");
     background-size: 100%;
+  }
+  .el-aside{
+    width: 30px;
   }
 
   .el-main {
     text-align: center;
+  }
+  .el-aside {
+    background-color: #545c64;
+    opacity: 0.75;
+  }
+  .el-header {
+    text-align: left;
+    background-color: #545c64;
+    opacity: 0.75;
+  }
+</style>
+
+<style>
+  .el-submenu__title {
+    font-size: 20px;
+    font-weight: 800;
   }
 </style>
