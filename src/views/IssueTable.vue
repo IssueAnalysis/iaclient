@@ -1,5 +1,5 @@
 <template>
-        <v-card align="center">
+        <v-card>
             <v-card-title>
                 Issue Table
                 <v-spacer></v-spacer>
