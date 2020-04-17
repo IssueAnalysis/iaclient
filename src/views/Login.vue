@@ -83,9 +83,10 @@
             handleLogin(){
 //                axios.post('/api/user/log_in',this.loginForm)
 //                    .then(res=>{
-//                    if(res){
+//                    if(res.data){
 //                        sessionStorage.setItem('accessToken',true)
 //                        sessionStorage.setItem('username',this.username)
+//                        sessionStorage.setItem('password',this.password)
 //                        this.$router.push('/')
 //                    }
 //                    else{

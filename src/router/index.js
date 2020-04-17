@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
+import MyIssues from "../views/MyIssues.vue";
 import IssueTable from "../views/IssueTable";
 import IssuePost from "../views/IssuePost";
 
@@ -40,6 +41,11 @@ Vue.use(VueRouter)
     path: '/signup',
     name: 'Signup',
     component: Signup
+  },
+  {
+    path: '/my_issues',
+    name: 'my_issues',
+    component: MyIssues
   }
 
 ]
