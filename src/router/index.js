@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
 import MyIssues from "../views/MyIssues.vue";
-import IssueTable from "../views/IssueTable";
 import IssuePost from "../views/IssuePost";
+import IssueCheck from "../views/IssueCheck";
 
 Vue.use(VueRouter)
 
@@ -17,7 +17,7 @@ Vue.use(VueRouter)
     {
       path: '/issue_check',
       name: 'issue_check',
-      component: IssueTable
+      component: IssueCheck
     },
     {
       path: '/issue_post',

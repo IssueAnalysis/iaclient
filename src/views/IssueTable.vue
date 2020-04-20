@@ -15,9 +15,12 @@
                     :headers="headers"
                     :items="issues"
                     :search="search"
-                    sort-by="ID"
+                    sort-by="id"
                     class="elevation-1"
             >
+                <template v-slot:item.description="{ item }">
+                    <div v-html="item.description"></div>
+                </template>
                 <template v-slot:no-data>
                     <v-btn color="primary" @click="initialize">Reset</v-btn>
                 </template>
@@ -26,13 +29,13 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    // import axios from 'axios'
+    import hljs from 'highlight.js'
     export default {
         name: "issueTable",
         data: () => ({
             search:"",
             operator:"",
-
             headers: [
                 { text: 'ID',value: 'id'},
                 { text: '概括', value: 'summary' },
@@ -41,24 +44,30 @@
                 { text: '考虑', value: 'consideration' },
             ],
             issues: [{
-                id:"testID",
+                id:"1",
                 summary:"testSummary",
-                description:"testDesc",
+                description:"这是一段代码<pre><code>int main(){ print(\"hello world!\");}</code></pre>",
                 intention:"testIntention",
-                consideration:"testConsideration"
-            }],
+                consideration:"testConsideration",
+            },
+                {
+                    id:"2",
+                    summary:"testSummary",
+                    description:"这是一段代码<pre><code>int main(){ print(\"hello world!\");}</code></pre>",
+                    intention:"testIntention",
+                    consideration:"testConsideration",
+                }],
         }),
         props:{
-            issue_id: String,
-            user_id: String,
+            actionType:String
         },
         created() {
             this.initialize()
         },
         methods:{
             initialize(){
-                const app = this
-                app.ticket_id = this.$route.query.ticket_id
+                // const app = this
+                // app.ticket_id = this.$route.query.ticket_id
                 // axios
                 //     .get(`/api/user/info`)
                 //     .then(response => {
@@ -74,10 +83,18 @@
                 //         this.$message.error('获取用户信息失败：Err = ' + error.response.data.message)
                 //     })
 
-                axios.get("/api/issue/find_all")
-                    .then(res=>{
-                        app.issues = res.data
-                    })
+                // axios.get("/api/issue/find_all")
+                //     .then(res=>{
+                //         app.issues = res.data
+                //     })
+                this.highlightCode()
+                console.log("init  "+this.actionType)
+            },
+            highlightCode() {
+                var pres = document.querySelectorAll("pre>code");
+                for (var i = 0; i < pres.length; i++) {
+                    hljs.highlightBlock(pres[i]);
+                }
             }
         }
     }
