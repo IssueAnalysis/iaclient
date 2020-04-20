@@ -19,7 +19,7 @@
                     class="elevation-1"
             >
                 <template v-slot:item.description="{ item }">
-                    <div v-html="item.description"></div>
+                    <div v-html="item.description" v-highlight></div>
                 </template>
                 <template v-slot:no-data>
                     <v-btn color="primary" @click="initialize">Reset</v-btn>
@@ -30,7 +30,6 @@
 
 <script>
     // import axios from 'axios'
-    import hljs from 'highlight.js'
     export default {
         name: "issueTable",
         data: () => ({
@@ -87,15 +86,8 @@
                 //     .then(res=>{
                 //         app.issues = res.data
                 //     })
-                this.highlightCode()
                 console.log("init  "+this.actionType)
             },
-            highlightCode() {
-                var pres = document.querySelectorAll("pre>code");
-                for (var i = 0; i < pres.length; i++) {
-                    hljs.highlightBlock(pres[i]);
-                }
-            }
         }
     }
 </script>

@@ -27,6 +27,7 @@
 
 <script>
     import IssueTable from "./IssueTable";
+    // import hljs from 'highlight.js'
     export default {
         name: "IssueCheck",
         components:{IssueTable},
@@ -46,6 +47,9 @@
                 ],
                 tab: null,
             }
+        },
+        created() {
+            // hljs.initHighlightingOnLoad()
         },
     }
 </script>

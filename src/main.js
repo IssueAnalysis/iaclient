@@ -8,9 +8,16 @@ import vuetify from './plugins/vuetify';
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 import 'highlight.js/styles/a11y-light.css';
+import hljs from 'highlight.js'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
+Vue.directive('highlight',function (el) {
+  let blocks = el.querySelectorAll('pre code');
+  blocks.forEach((block)=>{
+    hljs.highlightBlock(block)
+  })
+})
 
 new Vue({
   router,

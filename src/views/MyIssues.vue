@@ -59,7 +59,7 @@
         methods:{
             initialize(){
                 this.username = sessionStorage.getItem('username')
-                const app = this
+                // const app = this
 //                axios.post('/api/user/find_collect',this.username)
 //                    .then(res=>{
 //                    app.issues = res.data
