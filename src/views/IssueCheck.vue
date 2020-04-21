@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    import IssueTable from "./IssueTable";
+    import IssueTable from "../components/IssueTable";
     // import hljs from 'highlight.js'
     export default {
         name: "IssueCheck",

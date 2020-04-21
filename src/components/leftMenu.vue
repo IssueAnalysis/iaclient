@@ -14,7 +14,7 @@
                     <span style="margin-left: 10px">用户管理</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="user_center" @click="userCenter">我的收藏</el-menu-item>
+                    <el-menu-item index="user_center" @click="routeTo('/my_issues')">我的收藏</el-menu-item>
                 </el-menu-item-group>
                 <el-menu-item-group>
                     <el-menu-item index="pass_manage" @click="modifyPw">修改密码</el-menu-item>
