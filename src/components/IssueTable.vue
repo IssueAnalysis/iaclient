@@ -50,7 +50,7 @@
             headers: [
                 { text: 'ID',value: 'id'},
                 { text: '概括', value: 'summary' },
-                { text: '详细描述', value: 'description' },
+                { text: '详细描述', value: 'description',align:"left" },
                 { text: '关注点', value: 'intention' },
                 { text: '考虑', value: 'consideration' },
                 { text: '', value: 'actions', sortable: false },
