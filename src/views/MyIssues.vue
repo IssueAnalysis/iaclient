@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <v-card align="center">
         <v-card-title>
             Issue Table
@@ -57,10 +57,14 @@
             this.initialize()
         },
         methods:{
-            initialize(){
+            initialize() {
                 this.username = sessionStorage.getItem('username')
                 // const app = this
-//                axios.post('/api/user/find_collect',this.username)
+//                axios.get('/api/user/find_collect',{
+//                  params:{
+//                    user_id:app.username
+//                  }
+//                })
 //                    .then(res=>{
 //                    app.issues = res.data
 //                })
