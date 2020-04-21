@@ -6,6 +6,7 @@ import MyIssues from "../views/MyIssues.vue";
 import ModifyPassword from "../views/ModifyPassword.vue";
 import IssuePost from "../views/IssuePost";
 import IssueCheck from "../views/IssueCheck";
+import IssueDetail from "../views/IssueDetail.vue";
 
 Vue.use(VueRouter)
 
@@ -52,6 +53,11 @@ Vue.use(VueRouter)
     path: '/modify_password',
     name: 'modify_password',
     component: ModifyPassword
+  },
+  {
+    path: '/issue_detail',
+    name: 'issue_detail',
+    component: IssueDetail
   }
 
 ]
