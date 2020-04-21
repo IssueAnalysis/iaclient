@@ -141,7 +141,7 @@
 </script>
 
 <style lang='less' scoped>
-    .signup {
+    .modify_pw {
         width: 100vw;
         padding: 0;
         margin: 0;
@@ -151,7 +151,7 @@
         background-size: 100%;
         background-image: url("../assets/bgi.jpg");
         position: relative;
-        .signupBox {
+        .modifyBox {
             width: 460px;
             height: 580px;
             position: absolute;

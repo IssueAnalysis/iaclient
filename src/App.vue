@@ -1,10 +1,10 @@
 <template>
   <el-container>
-    <el-header v-if="$route.path!='/login'&&$route.path!='/signup'">
+    <el-header v-if="$route.path!='/login'&&$route.path!='/signup'&&$route.path!='/modify_password'">
       <myHeader />
     </el-header>
     <el-container>
-      <el-aside v-if="$route.path!='/login'&&$route.path!='/signup'">
+      <el-aside v-if="$route.path!='/login'&&$route.path!='/signup'&&$route.path!='/modify_password'">
         <leftMenu />
       </el-aside>
       <el-main>

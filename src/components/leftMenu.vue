@@ -17,7 +17,7 @@
                     <el-menu-item index="user_center" @click="routeTo('/my_issues')">我的收藏</el-menu-item>
                 </el-menu-item-group>
                 <el-menu-item-group>
-                    <el-menu-item index="pass_manage" @click="modifyPw">修改密码</el-menu-item>
+                    <el-menu-item index="pass_manage" @click="routeTo('/modify_password')">修改密码</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
@@ -50,15 +50,6 @@
             },
             handleClose() {
             },
-            userCenter(){
-//                this.$router.push('/')
-            },
-            modifyPw(){
-            },
-            viewIssue(){
-            },
-            importIssue(){
-            }
         }
     };
 </script>
