@@ -82,7 +82,7 @@
         },
         methods:{
             initialize(){
-                // const app = this
+                const app = this
                 // app.ticket_id = this.$route.query.ticket_id
                 // axios
                 //     .get(`/api/user/info`)
@@ -99,10 +99,10 @@
                 //         this.$message.error('获取用户信息失败：Err = ' + error.response.data.message)
                 //     })
 
-                // axios.get("/api/issue/find_all")
-                //     .then(res=>{
-                //         app.issues = res.data
-                //     })
+                axios.get("/api/issue/find_all")
+                    .then(res=>{
+                        app.issues = res.data
+                    })
                 console.log("init  "+this.actionType)
             },
             check(item){
