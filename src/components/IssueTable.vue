@@ -60,7 +60,20 @@
             issues: [{
                 id:"1",
                 summary:"testSummary",
-                description:"这是一段代码<pre><code>int main(){ print(\"hello world!\");}</code></pre>",
+                description:"\"I am using Hadoop-2.10.0.<pre><code>int main(){ print(\"hello world!\");}</code></pre>\n" +
+                    "<br>" +
+                    "<br>" +
+                    "\n" +
+                    "The configuration parameter `dfs.namenode.audit.loggers` allows `default` (which is the default value) and `org.apache.hadoop.hdfs.server.namenode.top.TopAuditLogger`.\n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "When I use `org.apache.hadoop.hdfs.server.namenode.top.TopAuditLogger`, namenode will not be started successfully because of an `InstantiationException` thrown from `org.apache.hadoop.hdfs.server.namenode.FSNamesystem.initAuditLoggers`.åÊ\n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "The root cause is that while initializing namenode, `initAuditLoggers` will be called and it will try to call the default constructor of `org.apache.hadoop.hdfs.server.namenode.top.TopAuditLogger` which doesn't have a default constructor. Thus the `InstantiationException` exception is thrown.\n" +
+                    "\n",
                 intention:"testIntention",
                 consideration:"testConsideration",
                 collect:false
@@ -106,7 +119,7 @@
                 console.log("init  "+this.actionType)
             },
             check(item){
-                this.$route.push('/issue_info',item.id)
+                this.$router.push({path:'/issue_detail',query:{issue_id:item.id}})
             },
             collect(item){
                 const app = this
