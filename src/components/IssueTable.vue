@@ -63,8 +63,7 @@
                 description:"\"I am using Hadoop-2.10.0.<pre><code>int main(){ print(\"hello world!\");}</code></pre>\n" +
                     "<br>" +
                     "<br>" +
-                    "\n" +
-                    "The configuration parameter `dfs.namenode.audit.loggers` allows `default` (which is the default value) and `org.apache.hadoop.hdfs.server.namenode.top.TopAuditLogger`.\n" +
+                    "<span style='color: red'>The configuration parameter `dfs.namenode.audit.loggers` allows `default` (which is the default value) and `org.apache.hadoop.hdfs.server.namenode.top.TopAuditLogger`.</span>\n" +
                     "\n" +
                     "\n" +
                     "\n" +
