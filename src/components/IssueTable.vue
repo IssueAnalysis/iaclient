@@ -59,6 +59,7 @@
             checkIcon: checkIcon,
             issues: [{
                 id:"1",
+                csv_id:0,
                 summary:"testSummary",
                 description:"\"I am using Hadoop-2.10.0.<pre><code>int main(){ print(\"hello world!\");}</code></pre>\n" +
                     "<br>" +
@@ -118,7 +119,7 @@
                 console.log("init  "+this.actionType)
             },
             check(item){
-                this.$router.push({path:'/issue_detail',query:{issue_id:item.id}})
+                this.$router.push({path:'/issue_detail',query:{issue_id:item.id,csv_id:item.csv_id}})
             },
             collect(item){
                 const app = this
