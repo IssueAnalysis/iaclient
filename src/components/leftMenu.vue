@@ -14,7 +14,7 @@
                     <span style="margin-left: 10px">用户管理</span>
                 </template>
                 <el-menu-item-group>
-                    <el-menu-item index="user_center" @click="routeTo('/issue_detail')">我的收藏</el-menu-item>
+                    <el-menu-item index="user_center" @click="routeTo('/user_center')">用户中心</el-menu-item>
                 </el-menu-item-group>
                 <el-menu-item-group>
                     <el-menu-item index="pass_manage" @click="routeTo('/modify_password')">修改密码</el-menu-item>
@@ -30,6 +30,9 @@
                 </el-menu-item-group>
                 <el-menu-item-group>
                     <el-menu-item index="issue_post" @click="routeTo('/issue_post')">Issue导入</el-menu-item>
+                </el-menu-item-group>
+                <el-menu-item-group>
+                    <el-menu-item index="intention_check" @click="routeTo('/intention_check')">查看关注点统计信息</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>

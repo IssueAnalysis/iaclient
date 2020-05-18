@@ -7,6 +7,7 @@ import ModifyPassword from "../views/ModifyPassword.vue";
 import IssuePost from "../views/IssuePost";
 import IssueCheck from "../views/IssueCheck";
 import IssueDetail from "../views/IssueDetail.vue";
+import IntentionCheck from "../views/IntentionCheck";
 
 Vue.use(VueRouter)
 
@@ -58,7 +59,12 @@ Vue.use(VueRouter)
     path: '/issue_detail',
     name: 'issue_detail',
     component: IssueDetail
-  }
+  },
+    {
+      path: '/intention_check',
+      name: 'intention_check',
+      component: IntentionCheck
+    }
 
 ]
 
