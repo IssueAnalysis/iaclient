@@ -36,13 +36,13 @@
                 titles:['收藏Issue','添加Issue','所有Issue'],
                 tableConfigs:[
                     {
-                        actionType: "test1",
+                        actionType: "find_collect",
                     },
                     {
-                        actionType: "test2",
+                        actionType: "find_add",
                     },
                     {
-                        actionType: "test3",
+                        actionType: "find_all",
                     }
                 ],
                 tab: null,

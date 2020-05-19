@@ -18,9 +18,6 @@
                     sort-by="id"
                     class="elevation-1"
             >
-                <template v-slot:item.description="{ item }">
-                    <div v-html="item.description" v-highlight></div>
-                </template>
                 <template v-slot:item.actions="{ item }">
                     <v-btn color="rgba(255, 0, 0, 0)" @click="check(item)">
                         <img :src=checkIcon style="width:20px;height:20px"/>
@@ -50,9 +47,7 @@
             headers: [
                 { text: 'ID',value: 'id'},
                 { text: '概括', value: 'summary' },
-                { text: '详细描述', value: 'description',align: 'start' },
-                { text: '关注点', value: 'intention' },
-                { text: '考虑', value: 'consideration' },
+                { text: '简要描述', value: 'brief_description',align: 'start' },
                 { text: '', value: 'actions', sortable: false },
             ],
             collectIcons:[collectIcon,noCollectIcon],
@@ -61,7 +56,7 @@
                 id:"1",
                 csv_id:0,
                 summary:"testSummary",
-                description:"\"I am using Hadoop-2.10.0.<pre><code>int main(){ print(\"hello world!\");}</code></pre>\n" +
+                brief_description:"\"I am using Hadoop-2.10.0.<pre><code>int main(){ print(\"hello world!\");}</code></pre>\n" +
                     "<br>" +
                     "<br>" +
                     "<span style='color: red'>The configuration parameter `dfs.namenode.audit.loggers` allows `default` (which is the default value) and `org.apache.hadoop.hdfs.server.namenode.top.TopAuditLogger`.</span>\n" +
@@ -74,16 +69,12 @@
                     "\n" +
                     "The root cause is that while initializing namenode, `initAuditLoggers` will be called and it will try to call the default constructor of `org.apache.hadoop.hdfs.server.namenode.top.TopAuditLogger` which doesn't have a default constructor. Thus the `InstantiationException` exception is thrown.\n" +
                     "\n",
-                intention:"testIntention",
-                consideration:"testConsideration",
                 collect:false
             },
                 {
                     id:"2",
                     summary:"testSummary",
-                    description:"这是一段代码<pre><code>int main(){ print(\"hello world!\");}</code></pre>",
-                    intention:"testIntention",
-                    consideration:"testConsideration",
+                    brief_description:"这是一段代码<pre><code>int main(){ print(\"hello world!\");}</code></pre>",
                     collect:false
                 }],
         }),
@@ -96,23 +87,8 @@
         methods:{
             initialize(){
                 const app = this
-                // app.ticket_id = this.$route.query.ticket_id
-                // axios
-                //     .get(`/api/user/info`)
-                //     .then(response => {
-                //         app.operator = response.data.user_name
-                //         axios.post("/api/issue/get",{
-                //             id:app.issue_id,
-                //             user_id:app.user_id
-                //         }).then(res=>{
-                //             app.issues = res.data
-                //         })
-                //     })
-                //     .catch(error => {
-                //         this.$message.error('获取用户信息失败：Err = ' + error.response.data.message)
-                //     })
-
-                axios.get("/api/issue/find_all")
+                let url = "/api/issue/"+app.actionType
+                axios.get(url)
                     .then(res=>{
                         app.issues = res.data
                     })
