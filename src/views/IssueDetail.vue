@@ -237,9 +237,12 @@
                 app.detailForm.focus[index].is_voted = !voted
                 if(voted){
                     app.detailForm.focus[index].vote--
+                    app.$message.success("取消成功")
                 }else{
                     app.detailForm.focus[index].vote++
+                    app.$message.success("投票成功")
                 }
+
             },
             voteKeyword(item){
                 const app = this
@@ -248,8 +251,10 @@
                 app.detailForm.keyword[index].is_voted = !voted
                 if(voted){
                     app.detailForm.keyword[index].vote--
+                    app.$message.success("取消成功")
                 }else{
                     app.detailForm.keyword[index].vote++
+                    app.$message.success("投票成功")
                 }
             },
             closeIntention(){
@@ -261,6 +266,7 @@
             saveIntention () {
                 this.detailForm.focus.push(this.editedIntention)
                 this.closeIntention()
+                this.$message.success("新增成功")
             },
             closeKeyword(){
                 this.keywordDialog = false
@@ -271,6 +277,7 @@
             saveKeyword () {
                 this.detailForm.keyword.push(this.editedKeyword)
                 this.closeKeyword()
+                this.$message.success("新增成功")
             },
         },
     }
