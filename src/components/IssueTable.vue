@@ -69,13 +69,13 @@
                     "\n" +
                     "The root cause is that while initializing namenode, `initAuditLoggers` will be called and it will try to call the default constructor of `org.apache.hadoop.hdfs.server.namenode.top.TopAuditLogger` which doesn't have a default constructor. Thus the `InstantiationException` exception is thrown.\n" +
                     "\n",
-                collect:false
+                collect:true
             },
                 {
                     id:"2",
                     summary:"testSummary",
                     brief_description:"这是一段代码<pre><code>int main(){ print(\"hello world!\");}</code></pre>",
-                    collect:false
+                    collect:true
                 }],
         }),
         props:{
