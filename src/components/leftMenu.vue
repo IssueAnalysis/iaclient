@@ -34,6 +34,9 @@
                 <el-menu-item-group>
                     <el-menu-item index="intention_check" @click="routeTo('/intention_check')">查看关注点统计信息</el-menu-item>
                 </el-menu-item-group>
+                <el-menu-item-group>
+                    <el-menu-item index="view_chart" @click="routeTo('/view_chart')">查看统计图表</el-menu-item>
+                </el-menu-item-group>
             </el-submenu>
         </el-menu>
     </div>

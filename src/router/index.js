@@ -2,12 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
+import UserCenter from "../views/UserCenter.vue";
 import MyIssues from "../views/MyIssues.vue";
 import ModifyPassword from "../views/ModifyPassword.vue";
 import IssuePost from "../views/IssuePost";
 import IssueCheck from "../views/IssueCheck";
 import IssueDetail from "../views/IssueDetail.vue";
 import IntentionCheck from "../views/IntentionCheck";
+import Chart from "../views/Chart.vue";
 
 Vue.use(VueRouter)
 
@@ -22,6 +24,16 @@ Vue.use(VueRouter)
       name: 'issue_check',
       component: IssueCheck
     },
+      {
+          path: '/user_center',
+          name: 'user_center',
+          component: UserCenter
+      },
+      {
+          path: '/view_chart',
+          name: 'view_chart',
+          component: Chart
+      },
     {
       path: '/issue_post',
       name: 'Issue_post',
