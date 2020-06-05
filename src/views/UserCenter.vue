@@ -107,12 +107,14 @@
         methods:{
             initialize(){
                 const app = this
-                let url = "/api/issue/"+app.actionType
-                axios.get(url)
+                axios.get("/api/issue/find_collect")
                     .then(res=>{
-                        app.issues = res.data
+                        app.issues1 = res.data
                     })
-                console.log("init  "+this.actionType)
+                axios.get("/api/issue/find_add")
+                    .then(res=>{
+                        app.issues2 = res.data
+                    })
             },
         }
     }

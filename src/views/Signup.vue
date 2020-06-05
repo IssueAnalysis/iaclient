@@ -95,7 +95,7 @@
 
 
 <script>
-    //    import axios from 'axios'
+    import axios from 'axios'
     export default {
         name: 'Signup',
         data () {
@@ -119,16 +119,16 @@
                     this.$message.error("请确认密码符合长度")
                 }
                 else {
-//                axios.post('/api/user/sign_up',this.signupForm)
-//                    .then(res=>{
-//                    if(res){
-//                        this.$message.success("注册成功")
-//                        this.$router.push('/login')
-//                    }
-//                    else{
-//                        this.$message.error("该用户名已被注册")
-//                    }
-//                })
+                axios.post('/api/user/sign_up',this.signupForm)
+                    .then(res=>{
+                    if(res){
+                        this.$message.success("注册成功")
+                        this.$router.push('/login')
+                    }
+                    else{
+                        this.$message.error("该用户名已被注册")
+                    }
+                })
                 }
             },
             handleReturn(){

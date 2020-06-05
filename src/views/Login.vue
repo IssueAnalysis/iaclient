@@ -68,7 +68,7 @@
 
 
 <script>
-//    import axios from 'axios'
+    import axios from 'axios'
     export default {
         name: 'login',
         data () {
@@ -81,26 +81,26 @@
         },
         methods:{
             handleLogin(){
-//                axios.post('/api/user/log_in',this.loginForm)
-//                    .then(res=>{
-//                    if(res.data){
-//                        sessionStorage.setItem('accessToken',true)
-//                        sessionStorage.setItem('username',this.username)
-//                        sessionStorage.setItem('password',this.password)
-//                        this.$router.push('/')
-//                    }
-//                    else{
-//                        this.$message.error("账号或密码错误")
-//                    }
-//                })
-                if(this.loginForm.username=='admin'&&this.loginForm.password=='123456'){
-                    sessionStorage.setItem('accessToken',true)
-                    sessionStorage.setItem('username',this.username)
-                    this.$router.push('/')
-                }
-                else{
-                    this.$message.error('Invalid username or password')
-                }
+                axios.post('/api/user/log_in',this.loginForm)
+                    .then(res=>{
+                    if(res.data){
+                        sessionStorage.setItem('accessToken',true)
+                        sessionStorage.setItem('username',this.username)
+                        sessionStorage.setItem('password',this.password)
+                        this.$router.push('/')
+                    }
+                    else{
+                        this.$message.error("账号或密码错误")
+                    }
+                })
+//                if(this.loginForm.username=='admin'&&this.loginForm.password=='123456'){
+//                    sessionStorage.setItem('accessToken',true)
+//                    sessionStorage.setItem('username',this.username)
+//                    this.$router.push('/')
+//                }
+//                else{
+//                    this.$message.error('Invalid username or password')
+//                }
             },
             handleSignup(){
                 this.$router.push('/signup')
