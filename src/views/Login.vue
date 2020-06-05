@@ -68,6 +68,7 @@
 
 <script>
     import axios from 'axios'
+    import Qs from 'qs'
     export default {
         name: 'login',
         data () {
@@ -80,7 +81,8 @@
         },
         methods:{
             handleLogin(){
-                axios.post('/api/user/log_in',this.loginForm)
+                let data = this.loginForm
+                axios.post('/api/user/log_in',Qs.stringify(data))
                     .then(res=>{
                     if(res.data){
                         sessionStorage.setItem('accessToken',true)
