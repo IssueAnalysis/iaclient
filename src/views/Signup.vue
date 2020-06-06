@@ -96,6 +96,7 @@
 
 <script>
     import axios from 'axios'
+    import Qs from 'qs'
     export default {
         name: 'Signup',
         data () {
@@ -119,7 +120,8 @@
                     this.$message.error("请确认密码符合长度")
                 }
                 else {
-                axios.post('/api/user/sign_up',this.signupForm)
+                    let form = this.signupForm
+                axios.post('/api/user/sign_up',Qs.stringify(form))
                     .then(res=>{
                     if(res){
                         this.$message.success("注册成功")

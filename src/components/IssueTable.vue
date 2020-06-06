@@ -36,6 +36,7 @@
 
 <script>
     import axios from 'axios'
+    import Qs from 'qs'
     import collectIcon from '../assets/collect.png'
     import noCollectIcon from '../assets/noCollect.png'
     import checkIcon from '../assets/check.png'
@@ -101,9 +102,10 @@
                 const app = this
                 const index = app.issues.indexOf(item)
                 let msg = "收藏失败, 请稍后重试"
-                axios.post('/api/action/collect_issues',{
+                let body = {
                     issues: [item.id]
-                }).then(res=>{
+                }
+                axios.post('/api/action/collect_issues',Qs.stringify(body)).then(res=>{
                     if(res.data.ret){
                         app.issues[index].collect = !app.issues[index].collect
                         msg = "收藏成功"
