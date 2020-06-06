@@ -48,36 +48,12 @@
             headers: [
                 { text: 'ID',value: 'id'},
                 { text: '概括', value: 'summary' },
-                { text: '简要描述', value: 'brief_description',align: 'start' },
+                { text: '简要描述', value: 'briefDescription',align: 'start' },
                 { text: '', value: 'actions', sortable: false },
             ],
             collectIcons:[collectIcon,noCollectIcon],
             checkIcon: checkIcon,
-            issues: [{
-                id:"1",
-                csv_id:0,
-                summary:"testSummary",
-                brief_description:"\"I am using Hadoop-2.10.0.<pre><code>int main(){ print(\"hello world!\");}</code></pre>\n" +
-                    "<br>" +
-                    "<br>" +
-                    "<span style='color: red'>The configuration parameter `dfs.namenode.audit.loggers` allows `default` (which is the default value) and `org.apache.hadoop.hdfs.server.namenode.top.TopAuditLogger`.</span>\n" +
-                    "\n" +
-                    "\n" +
-                    "\n" +
-                    "When I use `org.apache.hadoop.hdfs.server.namenode.top.TopAuditLogger`, namenode will not be started successfully because of an `InstantiationException` thrown from `org.apache.hadoop.hdfs.server.namenode.FSNamesystem.initAuditLoggers`.åÊ\n" +
-                    "\n" +
-                    "\n" +
-                    "\n" +
-                    "The root cause is that while initializing namenode, `initAuditLoggers` will be called and it will try to call the default constructor of `org.apache.hadoop.hdfs.server.namenode.top.TopAuditLogger` which doesn't have a default constructor. Thus the `InstantiationException` exception is thrown.\n" +
-                    "\n",
-                collect:true
-            },
-                {
-                    id:"2",
-                    summary:"testSummary",
-                    brief_description:"这是一段代码<pre><code>int main(){ print(\"hello world!\");}</code></pre>",
-                    collect:true
-                }],
+            issues: [],
         }),
         props:{
             actionType:String
@@ -96,22 +72,30 @@
                 console.log("init  "+this.actionType)
             },
             check(item){
-                this.$router.push({path:'/issue_detail',query:{issue_id:item.id,csv_id:item.csv_id}})
+                this.$router.push({
+                    path:'/issue_detail',
+                    query:{
+                        issue_id:item.id,
+                        csv_id:item.csvId
+                    }
+                })
             },
             collect(item){
                 const app = this
                 const index = app.issues.indexOf(item)
                 let msg = "收藏失败, 请稍后重试"
                 let body = {
-                    issues: [item.id]
+                    csv_id:item.csvId,
+                    id: item.id
                 }
                 axios.post('/api/action/collect_issues',Qs.stringify(body)).then(res=>{
-                    if(res.data.ret){
+                    if(res.data){
                         app.issues[index].collect = !app.issues[index].collect
-                        msg = "收藏成功"
+                        msg = "操作成功"
                         app.$message.success(msg)
+                    }else {
+                        app.$message.error(msg)
                     }
-                    app.$message.error(msg)
                 }).catch(()=>{
                     app.$message.error(msg)
                 })

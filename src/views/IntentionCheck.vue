@@ -35,31 +35,31 @@
         </el-table>
 
         <el-dialog title="Add Intention" :visible.sync="addIntentionVisible">
-            <el-form :model="form">
+            <el-form :model="editedIntention">
                 <el-form-item label="Desc" :label-width="formLabelWidth">
-                    <el-input v-model="form.name" autocomplete="off"></el-input>
+                    <el-input v-model="editedIntention.description" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="Type" :label-width="formLabelWidth">
-                    <el-input v-model="form.name" autocomplete="off"></el-input>
+                    <el-input v-model="editedIntention.type" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="Keyword Desc" :label-width="formLabelWidth">
-                    <el-input v-model="form.name" autocomplete="off"></el-input>
+                    <el-input v-model="editedIntention.keywordList[0].description" autocomplete="off"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="addIntentionVisible = false">取 消</el-button>
-                <el-button type="primary" @click="addIntentionVisible = false">确 定</el-button>
+                <el-button type="primary" @click="saveIntention">确 定</el-button>
             </div>
         </el-dialog>
         <el-dialog title="Add Keyword" :visible.sync="addKeywordVisible">
-            <el-form :model="form">
+            <el-form>
                 <el-form-item label="Desc" :label-width="formLabelWidth">
-                    <el-input v-model="form.name" autocomplete="off"></el-input>
+                    <el-input v-model="keywordDesc" autocomplete="off"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="addIntentionVisible = false">取 消</el-button>
-                <el-button type="primary" @click="addIntentionVisible = false">确 定</el-button>
+                <el-button type="primary" @click="saveKeyword">确 定</el-button>
             </div>
         </el-dialog>
     </div>
@@ -74,16 +74,15 @@
             return {
                 addIntentionVisible:false,
                 addKeywordVisible:false,
-                issueUpdatedID:-1,
-                form: {
-                    name: '',
-                    region: '',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: ''
+                intentionUpdatedID:-1,
+                keywordDesc:"",
+                editedIntention:{
+                    id:0,
+                    description:"",
+                    type:"",
+                    keywordList:[{
+                        description:""
+                    }]
                 },
                 formLabelWidth: '120px',
                 tableData: [],
@@ -119,27 +118,38 @@
                 app.transferList()
                 axios.get('/api/statistic/focus_info')
                     .then(res=>{
-                        app.focusInfoList = res.data.focusInfoList
+                        app.focusInfoList = res.data
                         app.transferList()
                     }).catch(err=>{
                     app.$message.error(err+"")
                 })
             },
             transferList(){
+                this.tableData = []
                 const focusList = this.focusInfoList
                 for(let i = 0;i<focusList.length;i++){
                     let len = focusList[i].keywordList.length
-                    for(let j = 0;j<len;j++){
+                    if(len===0){
                         let item = {
-                            description:focusList[i].description,
-                            type:focusList[i].type,
-                            keyword:focusList[i].keywordList[j].description,
-                            len:0
-                        }
-                        if(j===0){
-                            item.len = len
+                            description: focusList[i].description,
+                            type: focusList[i].type,
+                            keyword: "",
+                            len: 1
                         }
                         this.tableData.push(item)
+                    }else {
+                        for (let j = 0; j < len; j++) {
+                            let item = {
+                                description: focusList[i].description,
+                                type: focusList[i].type,
+                                keyword: focusList[i].keywordList[j].description,
+                                len: 0
+                            }
+                            if (j === 0) {
+                                item.len = len
+                            }
+                            this.tableData.push(item)
+                        }
                     }
                 }
             },
@@ -161,17 +171,55 @@
                 }
             },
             addIntention(){
+                console.log("focusInfoList:")
+                console.log(this.focusInfoList)
+                console.log("tableData:")
+                console.log(this.tableData)
                 this.addIntentionVisible = true
             },
             addKeyword(item){
                 this.addKeywordVisible = true
-                this.issueUpdatedID = item.id
+                this.intentionUpdatedID = item.id
             },
             saveIntention(){
-
+                let app = this
+                axios.post("/api/statistic/add_focus",app.editedIntention)
+                    .then(res=>{
+                        app.editedIntention.id = res.data
+                        app.focusInfoList.push(app.editedIntention)
+                        app.transferList()
+                        app.editedIntention.id = 0
+                        app.$message.success("添加成功")
+                    }).catch(err=>{
+                        app.$message.error(err+"")
+                })
             },
             saveKeyword(){
-
+                let app = this
+                let index = app.findIndexOfFocus()
+                if(index===-1){
+                    app.$message.error("关注点不存在")
+                }else{
+                    app.focusInfoList[index].keywordList.push({
+                        description:app.keywordDesc
+                    })
+                    axios.post("/api/statistic/update_focus",app.focusInfoList[index])
+                        .then(()=>{
+                            app.transferList()
+                            app.$message.success("添加成功")
+                        })
+                        .catch(err=>{
+                            app.$message.error(err+"")
+                        })
+                }
+            },
+            findIndexOfFocus(){
+                for(let i=0;i<this.focusInfoList.length;i++){
+                    if(this.focusInfoList[i].id===this.intentionUpdatedID){
+                        return i
+                    }
+                }
+                return -1
             }
         }
     }

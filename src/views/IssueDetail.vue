@@ -25,6 +25,7 @@
                 :headers="intentionHeaders"
                 :items="detailForm.focus"
                 sort-by="vote"
+                sort-desc="true"
                 class="elevation-1"
         >
             <template v-slot:top>
@@ -35,41 +36,11 @@
                             inset
                             vertical
                     ></v-divider>
-                    <v-spacer></v-spacer>
-                    <v-dialog v-model="intentionDialog" max-width="500px">
-                        <template v-slot:activator="{ on }">
-                            <v-btn color="primary" dark class="mb-2" v-on="on">New</v-btn>
-                        </template>
-                        <v-card>
-                            <v-card-title>
-                                <span class="headline">New</span>
-                            </v-card-title>
-
-                            <v-card-text>
-                                <v-container>
-                                    <v-row>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedIntention.description" label="Description"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedIntention.type" label="Type"></v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                </v-container>
-                            </v-card-text>
-
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" text @click="closeIntention">Cancel</v-btn>
-                                <v-btn color="blue darken-1" text @click="saveIntention">Save</v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
                 </v-toolbar>
             </template>
             <template v-slot:item.actions="{ item }">
                 <v-btn color="rgba(255, 0, 0, 0)" @click="voteIntention(item)">
-                    <img :src=collectIcons[item.is_voted?1:0] style="width:20px;height:20px"/>
+                    <img :src=collectIcons[item.isVoted?1:0] style="width:20px;height:20px"/>
                 </v-btn>
             </template>
             <template v-slot:no-data>
@@ -81,6 +52,7 @@
                 :headers="keywordHeaders"
                 :items="detailForm.keyword"
                 sort-by="vote"
+                sort-desc="true"
                 class="elevation-1"
         >
             <template v-slot:top>
@@ -91,38 +63,11 @@
                             inset
                             vertical
                     ></v-divider>
-                    <v-spacer></v-spacer>
-                    <v-dialog v-model="keywordDialog" max-width="500px">
-                        <template v-slot:activator="{ on }">
-                            <v-btn color="primary" dark class="mb-2" v-on="on">New</v-btn>
-                        </template>
-                        <v-card>
-                            <v-card-title>
-                                <span class="headline">New</span>
-                            </v-card-title>
-
-                            <v-card-text>
-                                <v-container>
-                                    <v-row>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedKeyword.description" label="Description"></v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                </v-container>
-                            </v-card-text>
-
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="blue darken-1" text @click="closeKeyword">Cancel</v-btn>
-                                <v-btn color="blue darken-1" text @click="saveKeyword">Save</v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
                 </v-toolbar>
             </template>
             <template v-slot:item.actions="{ item }">
                 <v-btn color="rgba(255, 0, 0, 0)" @click="voteKeyword(item)">
-                    <img :src=collectIcons[item.is_voted?1:0] style="width:20px;height:20px"/>
+                    <img :src=collectIcons[item.isVoted?1:0] style="width:20px;height:20px"/>
                 </v-btn>
             </template>
             <template v-slot:no-data>
@@ -138,46 +83,23 @@
     import collectIcon from "../assets/collect.png";
     import noCollectIcon from "../assets/noCollect.png";
     import axios from 'axios'
+    import Qs from 'qs'
 
     export default {
         name: 'issue_detail',
         data () {
             return {
-                intentionDialog:false,
                 intentionHeaders:[
                     { text: 'Description', value: 'description' },
                     { text: 'Type', value: 'type' },
                     { text: 'Vote Num', value: 'vote' },
                     { text: 'Actions', value: 'actions', sortable: false },
                 ],
-                editedIntention:{
-                    description:"",
-                    type:"",
-                    vote:0,
-                    is_voted:false,
-                },
-                defaultIntention:{
-                    description:"",
-                    type:"",
-                    vote:0,
-                    is_voted:false,
-                },
-                keywordDialog:false,
                 keywordHeaders:[
                     { text: 'Description', value: 'description' },
                     { text: 'Vote Num', value: 'vote' },
                     { text: 'Actions', value: 'actions', sortable: false },
                 ],
-                editedKeyword:{
-                    description:"",
-                    vote:0,
-                    is_voted:false,
-                },
-                defaultKeyword:{
-                    description:"",
-                    vote:0,
-                    is_voted:false,
-                },
                 panel:[0,1],
                 items:5,
                 collectIcons:[collectIcon,noCollectIcon],
@@ -198,20 +120,20 @@
                         description:"testFocus",
                         type:"",
                         vote:0,
-                        is_voted:true,
+                        isVoted:true,
                     }],
                     keyword:[{
                         description:"",
                         vote:0,
-                        is_voted:true,
+                        isVoted:true,
                     },{
                         description:"",
                         vote:2,
-                        is_voted:true,
+                        isVoted:true,
                     },{
                         description:"",
                         vote:1,
-                        is_voted:true,
+                        isVoted:true,
                     }],
                 },
                 confPassword:''
@@ -225,59 +147,59 @@
                 const app = this
                 let id = app.$route.query.issue_id
                 let csv_id = app.$route.query.csv_id
-                axios.get("/api/issue/detail",{params: {id: id,csv_id:csv_id}})
+                axios.get("/api/issue/detail",{
+                    params: {
+                        id: id,
+                        csv_id:csv_id
+                    }
+                })
                 .then(res=>{
-                    app.detailForm = res.data.issue
+                    app.detailForm = res.data
                 })
             },
             voteIntention(item){
                 const app = this
                 const index = app.detailForm.focus.indexOf(item)
-                let voted = app.detailForm.focus[index].is_voted
-                app.detailForm.focus[index].is_voted = !voted
-                if(voted){
-                    app.detailForm.focus[index].vote--
-                    app.$message.success("取消成功")
-                }else{
+                if(app.detailForm.focus[index].isVoted===true){
+                    app.$message.warning("请勿重复投票")
+                    return
+                }
+                let focus = app.detailForm.focus[index]
+                let body = {
+                    issue_id:app.detailForm.id,
+                    csv_id:app.detailForm.csv_id,
+                    focus_id:focus.id
+                }
+                axios.post("/api/issue/vote_focus",Qs.stringify(body))
+                    .then(()=>{
+                    app.detailForm.focus[index].isVoted = true
                     app.detailForm.focus[index].vote++
                     app.$message.success("投票成功")
-                }
-
+                }).catch(err=>{
+                    app.$message.error(err+"")
+                })
             },
             voteKeyword(item){
                 const app = this
                 const index = app.detailForm.keyword.indexOf(item)
-                let voted = app.detailForm.keyword[index].is_voted
-                app.detailForm.keyword[index].is_voted = !voted
-                if(voted){
-                    app.detailForm.keyword[index].vote--
-                    app.$message.success("取消成功")
-                }else{
+                if(app.detailForm.keyword[index].isVoted===true){
+                    app.$message.warning("请勿重复投票")
+                    return
+                }
+                let keyword = app.detailForm.keyword[index]
+                let body = {
+                    issue_id:app.detailForm.id,
+                    csv_id:app.detailForm.csv_id,
+                    keyword_id:keyword.id
+                }
+                axios.post("/api/issue/vote_keyword",Qs.stringify(body))
+                    .then(()=>{
+                    app.detailForm.keyword[index].isVoted = true
                     app.detailForm.keyword[index].vote++
                     app.$message.success("投票成功")
-                }
-            },
-            closeIntention(){
-                this.intentionDialog = false
-                this.$nextTick(() => {
-                    this.editedIntention = Object.assign({}, this.defaultIntention)
+                }).catch(err=>{
+                    app.$message.error(err+"")
                 })
-            },
-            saveIntention () {
-                this.detailForm.focus.push(this.editedIntention)
-                this.closeIntention()
-                this.$message.success("新增成功")
-            },
-            closeKeyword(){
-                this.keywordDialog = false
-                this.$nextTick(() => {
-                    this.editedKeyword = Object.assign({}, this.defaultKeyword)
-                })
-            },
-            saveKeyword () {
-                this.detailForm.keyword.push(this.editedKeyword)
-                this.closeKeyword()
-                this.$message.success("新增成功")
             },
         },
     }
