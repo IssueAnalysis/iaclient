@@ -138,40 +138,41 @@
                 let myChart = echarts.init(document.getElementById('myedited_rate'));
                 myChart.setOption(
                     {
-                        title:{
-                            text:'系统中已添加与未添加关注点的Issue（我上传的）个数',
+                        title: {
+                            text: '关注点对应Issue数量统计',
                             x:'center'
                         },
-                        tooltip:{
-                            trigger:'item',
-                            formatter: '{a} <br/>{b}: {c} ({d}%)'
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
                         },
-                        legend:{
-                            orient:'vertical',
-                            left:100,
-                            data:['已添加','未添加']
+                        grid: {
+                            containLabel: true
                         },
-                        series:[{
-                            name:'Issue情况统计',
-                            type:'pie',
-                            radius: ['50%', '75%'],
-                            avoidLabelOverlap: false,
-                            label: {
-                                show: false,
-                                position: 'center'
-                            },
-                            emphasis: {
-                                label: {
-                                    show: true,
-                                    fontSize: '30',
-                                    fontWeight: 'bold'
+                        xAxis: {
+                            type: 'value',
+                        },
+                        yAxis: {
+                            type: 'category',
+                            data: ['a', 'b', 'c', 'd', 'e', 'f']
+                        },
+                        series: [
+                            {
+                                name: '对应Issue数量',
+                                type: 'bar',
+                                data: [1, 2, 3, 12, 1, 6],
+                                itemStyle: {
+                                    normal: {
+                                        color: function(params) {
+                                            var colorList = ['#0A2A29','#0A2A29','#0A2A29','#0A2A29','#0A2A29','#0A2A29','#0A2A29','#0A2A29','#0A2A29','#0A2A29','#0A2A29','#0A2A29','#0A2A29','#0A2A29'];
+                                            return colorList[params.dataIndex]
+                                        }
+                                    }
                                 }
-                            },
-                            labelLine: {
-                                show: false
-                            },
-                            data: this.myIssueInfo
-                        }]
+                            }
+                        ]
                     }
                 )
             },
