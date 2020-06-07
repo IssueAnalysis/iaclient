@@ -1,10 +1,13 @@
 <template>
     <div>
         <el-row>
-            <el-col :span="12">
-                <h1 style="margin-top: 10px">IssueAnalysis</h1>
+            <el-col span="1.5">
+                <img src="../assets/logo.png" style="margin: 10px;width:50px;height:50px"/>
             </el-col>
-            <el-col class="logout" :span="12">
+            <el-col span="12">
+                <h1 style="color:yellow;margin-top: 16px">IssueAnalysis</h1>
+            </el-col>
+            <el-col class="logout" span="10">
                 <template>
                     <div class="navOperater">
                         <el-button

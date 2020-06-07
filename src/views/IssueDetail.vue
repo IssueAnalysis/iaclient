@@ -40,7 +40,7 @@
             </template>
             <template v-slot:item.actions="{ item }">
                 <v-btn color="rgba(255, 0, 0, 0)" @click="voteIntention(item)">
-                    <img :src=collectIcons[item.isVoted?1:0] style="width:20px;height:20px"/>
+                    <img :src=collectIcons[item.voted?1:0] style="width:20px;height:20px"/>
                 </v-btn>
             </template>
             <template v-slot:no-data>
@@ -67,7 +67,7 @@
             </template>
             <template v-slot:item.actions="{ item }">
                 <v-btn color="rgba(255, 0, 0, 0)" @click="voteKeyword(item)">
-                    <img :src=collectIcons[item.isVoted?1:0] style="width:20px;height:20px"/>
+                    <img :src=collectIcons[item.voted?1:0] style="width:20px;height:20px"/>
                 </v-btn>
             </template>
             <template v-slot:no-data>
@@ -80,8 +80,8 @@
 </template>
 
 <script>
-    import collectIcon from "../assets/collect.png";
-    import noCollectIcon from "../assets/noCollect.png";
+    import collectIcon from "../assets/voted.png";
+    import noCollectIcon from "../assets/novoted.png";
     import axios from 'axios'
     import Qs from 'qs'
 
@@ -120,20 +120,20 @@
                         description:"testFocus",
                         type:"",
                         vote:0,
-                        isVoted:true,
+                        voted:true,
                     }],
                     keyword:[{
                         description:"",
                         vote:0,
-                        isVoted:true,
+                        voted:true,
                     },{
                         description:"",
                         vote:2,
-                        isVoted:true,
+                        voted:true,
                     },{
                         description:"",
                         vote:1,
-                        isVoted:true,
+                        voted:true,
                     }],
                 },
                 confPassword:''
@@ -160,7 +160,7 @@
             voteIntention(item){
                 const app = this
                 const index = app.detailForm.focus.indexOf(item)
-                if(app.detailForm.focus[index].isVoted===true){
+                if(app.detailForm.focus[index].voted===true){
                     app.$message.warning("请勿重复投票")
                     return
                 }
@@ -172,7 +172,7 @@
                 }
                 axios.post("/api/issue/vote_focus",Qs.stringify(body))
                     .then(()=>{
-                    app.detailForm.focus[index].isVoted = true
+                    app.detailForm.focus[index].voted = true
                     app.detailForm.focus[index].vote++
                     app.$message.success("投票成功")
                 }).catch(err=>{
@@ -182,7 +182,7 @@
             voteKeyword(item){
                 const app = this
                 const index = app.detailForm.keyword.indexOf(item)
-                if(app.detailForm.keyword[index].isVoted===true){
+                if(app.detailForm.keyword[index].voted===true){
                     app.$message.warning("请勿重复投票")
                     return
                 }
@@ -194,7 +194,7 @@
                 }
                 axios.post("/api/issue/vote_keyword",Qs.stringify(body))
                     .then(()=>{
-                    app.detailForm.keyword[index].isVoted = true
+                    app.detailForm.keyword[index].voted = true
                     app.detailForm.keyword[index].vote++
                     app.$message.success("投票成功")
                 }).catch(err=>{

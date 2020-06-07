@@ -8,20 +8,30 @@
             <el-table-column
                     prop="description"
                     label="Intention">
+                <el-tag
+                        disable-transitions>{{scope.row.description}}</el-tag>
             </el-table-column>
             <el-table-column
                     prop="type"
                     label="Type">
+                <el-tag
+                        type="primary"
+                        disable-transitions>{{scope.row.type}}</el-tag>
             </el-table-column>
             <el-table-column
                     prop="keyword"
                     label="Keyword">
+
+                <el-tag
+                        type="warning"
+                        disable-transitions>{{scope.row.keyword}}</el-tag>
             </el-table-column>
             <el-table-column
                     align="center">
                 <template slot="header">
                     <el-button
                             size="mini"
+                            type="danger"
                             @click="addIntention()">Add Intention</el-button>
                 </template>
                 <template slot-scope="scope">
@@ -42,13 +52,13 @@
                 <el-form-item label="Type" :label-width="formLabelWidth">
                     <el-input v-model="editedIntention.type" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="Keyword Desc" :label-width="formLabelWidth">
+                <el-form-item label="Keyword" :label-width="formLabelWidth">
                     <el-input v-model="editedIntention.keywordList[0].description" autocomplete="off"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button @click="addIntentionVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveIntention">确 定</el-button>
+                <el-button @click="addIntentionVisible = false">Cancel</el-button>
+                <el-button type="primary" @click="saveIntention">OK</el-button>
             </div>
         </el-dialog>
         <el-dialog title="Add Keyword" :visible.sync="addKeywordVisible">
@@ -58,8 +68,8 @@
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button @click="addIntentionVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveKeyword">确 定</el-button>
+                <el-button @click="addIntentionVisible = false">Cancel</el-button>
+                <el-button type="primary" @click="saveKeyword">OK</el-button>
             </div>
         </el-dialog>
     </div>
@@ -131,6 +141,7 @@
                     let len = focusList[i].keywordList.length
                     if(len===0){
                         let item = {
+                            id:focusList[i].id,
                             description: focusList[i].description,
                             type: focusList[i].type,
                             keyword: "",
@@ -140,6 +151,7 @@
                     }else {
                         for (let j = 0; j < len; j++) {
                             let item = {
+                                id:focusList[i].id,
                                 description: focusList[i].description,
                                 type: focusList[i].type,
                                 keyword: focusList[i].keywordList[j].description,
@@ -189,6 +201,7 @@
                         app.focusInfoList.push(app.editedIntention)
                         app.transferList()
                         app.editedIntention.id = 0
+                        this.addIntentionVisible = false
                         app.$message.success("添加成功")
                     }).catch(err=>{
                         app.$message.error(err+"")
@@ -206,6 +219,7 @@
                     axios.post("/api/statistic/update_focus",app.focusInfoList[index])
                         .then(()=>{
                             app.transferList()
+                            this.addKeywordVisible = false
                             app.$message.success("添加成功")
                         })
                         .catch(err=>{

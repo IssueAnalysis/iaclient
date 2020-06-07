@@ -47,8 +47,8 @@
             operator:"",
             headers: [
                 { text: 'ID',value: 'id'},
-                { text: '概括', value: 'summary' },
-                { text: '简要描述', value: 'briefDescription',align: 'start' },
+                { text: 'Summary', value: 'summary' },
+                { text: 'Brief Description', value: 'briefDescription',align: 'start' },
                 { text: '', value: 'actions', sortable: false },
             ],
             collectIcons:[collectIcon,noCollectIcon],
