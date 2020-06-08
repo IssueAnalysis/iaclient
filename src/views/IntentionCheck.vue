@@ -8,35 +8,41 @@
             <el-table-column
                     prop="description"
                     label="Intention">
-                <el-tag
-                        disable-transitions>{{scope.row.description}}</el-tag>
+                <template slot-scope="scope">
+                    <el-tag
+                            disable-transitions>{{scope.row.description}}</el-tag>
+                </template>
             </el-table-column>
             <el-table-column
                     prop="type"
                     label="Type">
-                <el-tag
-                        type="primary"
-                        disable-transitions>{{scope.row.type}}</el-tag>
+                <template slot-scope="scope">
+                    <el-tag
+                            type="warning"
+                            disable-transitions>{{scope.row.type}}</el-tag>
+                </template>
             </el-table-column>
             <el-table-column
                     prop="keyword"
                     label="Keyword">
-
-                <el-tag
-                        type="warning"
-                        disable-transitions>{{scope.row.keyword}}</el-tag>
+                <template slot-scope="scope">
+                    <el-tag
+                            type="success"
+                            disable-transitions>{{scope.row.keyword}}</el-tag>
+                </template>
             </el-table-column>
             <el-table-column
                     align="center">
                 <template slot="header">
                     <el-button
                             size="mini"
-                            type="danger"
+                            type="success"
                             @click="addIntention()">Add Intention</el-button>
                 </template>
                 <template slot-scope="scope">
                     <el-button
                             size="mini"
+                            type="warning"
                             @click="addKeyword(scope.row)">Add Keyword</el-button>
                 </template>
 
@@ -204,7 +210,7 @@
                         this.addIntentionVisible = false
                         app.$message.success("添加成功")
                     }).catch(err=>{
-                        app.$message.error(err+"")
+                    app.$message.error(err+"")
                 })
             },
             saveKeyword(){
