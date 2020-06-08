@@ -206,7 +206,7 @@
                         app.editedIntention.id = res.data
                         app.focusInfoList.push(app.editedIntention)
                         app.transferList()
-                        app.editedIntention.id = 0
+                        app.editedIntention = Object.assign({},app.defaultIntention)
                         this.addIntentionVisible = false
                         app.$message.success("添加成功")
                     }).catch(err=>{
