@@ -156,13 +156,13 @@
                         },
                         yAxis: {
                             type: 'category',
-                            data: ['a', 'b', 'c', 'd', 'e', 'f']
+                            data: ['块接收器', '数据接收器', '输入流', '日志等级']
                         },
                         series: [
                             {
                                 name: '对应Issue数量',
                                 type: 'bar',
-                                data: [1, 2, 3, 12, 1, 6],
+                                data: [1, 2, 4, 8],
                                 itemStyle: {
                                     normal: {
                                         color: function(params) {
