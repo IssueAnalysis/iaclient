@@ -67,8 +67,8 @@
 </template>
 
 <script>
-    import axios from 'axios'
-    import Qs from 'qs'
+    // import axios from 'axios'
+    // import Qs from 'qs'
     export default {
         name: 'login',
         data () {
@@ -81,27 +81,27 @@
         },
         methods:{
             handleLogin(){
-//                 if(this.loginForm.username=='admin'&&this.loginForm.password=='123456'){
-//                     sessionStorage.setItem('accessToken',true)
-//                     sessionStorage.setItem('username',this.username)
-//                     this.$router.push('/')
-//                 }
-//                 else{
-//                     this.$message.error('Invalid username or password')
-//                 }
-                let data = this.loginForm
-                axios.post('/api/user/log_in',Qs.stringify(data))
-                    .then(res=>{
-                    if(res.data){
-                        sessionStorage.setItem('accessToken',true)
-                        sessionStorage.setItem('username',this.username)
-                        sessionStorage.setItem('password',this.password)
-                        this.$router.push('/')
-                    }
-                    else{
-                        this.$message.error("账号或密码错误")
-                    }
-                })
+                if(this.loginForm.username=='admin'&&this.loginForm.password=='123456'){
+                    sessionStorage.setItem('accessToken',true)
+                    sessionStorage.setItem('username',this.username)
+                    this.$router.push('/')
+                }
+                else{
+                    this.$message.error('Invalid username or password')
+                }
+                // let data = this.loginForm
+                // axios.post('/api/user/log_in',Qs.stringify(data))
+                //     .then(res=>{
+                //     if(res.data){
+                //         sessionStorage.setItem('accessToken',true)
+                //         sessionStorage.setItem('username',this.username)
+                //         sessionStorage.setItem('password',this.password)
+                //         this.$router.push('/')
+                //     }
+                //     else{
+                //         this.$message.error("账号或密码错误")
+                //     }
+                // })
             },
             handleSignup(){
                 this.$router.push('/signup')

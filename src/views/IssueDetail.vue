@@ -40,7 +40,7 @@
             </template>
             <template v-slot:item.actions="{ item }">
                 <v-btn color="rgba(255, 0, 0, 0)" @click="voteIntention(item)">
-                    <img :src=collectIcons[item.voted?1:0] style="width:20px;height:20px"/>
+                    <img :src=collectIcons[item.voted?0:1] style="width:20px;height:20px"/>
                 </v-btn>
             </template>
             <template v-slot:no-data>
@@ -67,7 +67,7 @@
             </template>
             <template v-slot:item.actions="{ item }">
                 <v-btn color="rgba(255, 0, 0, 0)" @click="voteKeyword(item)">
-                    <img :src=collectIcons[item.voted?1:0] style="width:20px;height:20px"/>
+                    <img :src=collectIcons[item.voted?0:1] style="width:20px;height:20px"/>
                 </v-btn>
             </template>
             <template v-slot:no-data>

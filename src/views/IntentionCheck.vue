@@ -100,6 +100,14 @@
                         description:""
                     }]
                 },
+                defaultIntention:{
+                    id:0,
+                    description:"",
+                    type:"",
+                    keywordList:[{
+                        description:""
+                    }]
+                },
                 formLabelWidth: '120px',
                 tableData: [],
                 init:false,
